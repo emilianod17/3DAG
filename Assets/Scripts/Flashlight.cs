@@ -8,7 +8,7 @@ public class Flashlight : MonoBehaviour
     [SerializeField] private InputActionReference toggleAction;
     [SerializeField] private Light flashLight;
     [SerializeField] private AudioClip flashLightSound;
-     private new AudioSource audio; //Will hold the AudioSource Component
+    private new AudioSource audio; //Will hold the AudioSource Component
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

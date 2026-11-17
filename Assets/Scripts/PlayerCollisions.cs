@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerCollisions : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class PlayerCollisions : MonoBehaviour
 
     // Battery Sound
     [SerializeField] private AudioClip pickupCollectSound;
+
+    /* Spawn point
+    [SerializeField] private Transform spawnPoint;
+
+    private bool isRespawning = false; */
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,6 +66,27 @@ public class PlayerCollisions : MonoBehaviour
             OpenDoor();
 
             PickupCollect.hud.enabled = false;
+        }
+        else if(hit.gameObject.CompareTag("houseDoor") && PickupCollect.pickupAmount < 4)
+        {
+            PickupCollect.hud.enabled = true;
+
+            TextHints.message = "This door needs power to open...";
+
+            TextHints.textOn = true;
+        }
+
+        if(hit.gameObject.CompareTag("lockedDoor")) //&& !isRespawning)
+        {
+            // isRespawning = true;
+
+            TextHints.message = "Can't go there";
+
+            TextHints.textOn = true;
+
+            // StartCorouting(Respawn(2.0f));
+
+            // Time.timeScale = 0;
         }
     }
 
@@ -104,4 +132,14 @@ public class PlayerCollisions : MonoBehaviour
         }
     } 
 
+    /* private IEnumerator Respawn(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
+        transform.position = spawnPoint.position;
+
+        isRespawning = false;
+
+        Time.timeScale = 1;
+    } */
 }
